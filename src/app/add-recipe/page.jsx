@@ -6,12 +6,6 @@ import SubmitForm from "./SubmitForm";
 export default function AddRecipe() {
 
 
-
-
-    //  transfer the element only
-
-
-
     return (
         <section className="min-h-screen bg-[#f7f6ef] px-5 py-12 sm:px-8 lg:px-12">
             <div className="mx-auto max-w-4xl">
