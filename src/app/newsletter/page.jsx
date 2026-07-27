@@ -1,0 +1,9 @@
+import { FaEnvelopeOpenText, FaLeaf } from "react-icons/fa";
+
+export default function Newsletter() {
+  return (
+    <main className="min-h-screen bg-[#f7f6ef] px-5 py-12 sm:px-8 lg:px-12">
+      <section className="mx-auto grid max-w-5xl overflow-hidden rounded-3xl bg-[#173308] text-white shadow-xl lg:grid-cols-2"><div className="p-8 sm:p-12"><div className="inline-flex rounded-full bg-white/10 p-4 text-[#b7ea92]"><FaEnvelopeOpenText size={32} /></div><p className="mt-7 font-semibold uppercase tracking-[0.16em] text-[#b7ea92]">My Kitchen newsletter</p><h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">Fresh recipe ideas in your inbox</h1><p className="mt-5 leading-7 text-[#cbd9c3]">Get easy meal ideas, seasonal cooking tips, and tasty inspiration once a week.</p><div className="mt-8 flex items-center gap-3 text-sm text-[#d9ebce]"><FaLeaf className="text-[#b7ea92]" /> No spam. Just helpful food ideas.</div></div><div className="bg-[#eff7e9] p-8 text-[#1f2f17] sm:p-12"><h2 className="text-2xl font-bold">Join the kitchen table</h2><p className="mt-2 text-[#52604b]">Enter your email to subscribe.</p><form action="mailto:support@mykitchen.com" method="post" encType="text/plain" className="mt-7"><label><span className="mb-2 block text-sm font-semibold">Email address</span><input name="email" type="email" required placeholder="you@example.com" className="h-12 w-full rounded-xl border border-[#c7d4bd] bg-white px-4 outline-none focus:border-[#54920f] focus:ring-4 focus:ring-[#54920f]/10" /></label><button type="submit" className="mt-5 w-full rounded-full bg-[#b65313] px-6 py-3 font-bold text-white transition hover:bg-[#d16c29]">Subscribe now</button></form><p className="mt-4 text-center text-xs leading-5 text-[#63705c]">Your email app will open to send the subscription request.</p></div></section>
+    </main>
+  );
+}

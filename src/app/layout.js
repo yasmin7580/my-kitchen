@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import AppQueryClientProvider from "./QueryClientProvider";
+import AiChatAssistant from "@/Components/AiChatAssistant";
 
 const OutfitFont = Outfit({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer/>
+          <AiChatAssistant />
         </AppQueryClientProvider>
       </body>
     </html>

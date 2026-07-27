@@ -8,14 +8,17 @@ import {
     FieldError,
     Form,
     Input,
-    Label,  
+    Label,
     TextField
 } from "@heroui/react";
+import { Eye, EyeClosed, Mail } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
+    const [visiblePass, setVisiblePass] = useState(false)
 
     const router = useRouter();
 
@@ -107,49 +110,21 @@ const LoginPage = () => {
                         </TextField>
 
                         {/* Password */}
-                        <TextField
-                            isRequired
-                            minLength={8}
-                            name="password"
-                            type="password"
-                            validate={(value) => {
+                        <div>
+                            <label className="text-sm font-medium text-gray-700">Password</label>
+                            <div>
 
+                                <div className="flex items-center border rounded-lg mt-2 px-3 focus-within:ring-2 focus-within:ring-[#00d3f2]">
+                                    <Mail size={20} className="text-gray-400" />
+                                    <input name="password" type={visiblePass ? "text" : "password"} placeholder="Enter your password" className="w-full px-3 py-3 outline-none text-gray-500" />
+                                    <button type="button" onClick={() => setVisiblePass(!visiblePass)}>
 
-
-                                if (value.length < 8) {
-                                    return "Password must be at least 8 characters";
-                                }
-
-                                if (!/[A-Z]/.test(value)) {
-                                    return "Password must contain at least one uppercase letter";
-                                }
-
-                                if (!/[0-9]/.test(value)) {
-                                    return "Password must contain at least one number";
-                                }
-
-                                return null;
-                            }}
-                        >
-
-
-
-                            <Label>Password</Label>
-
-                            <Input
-                                placeholder="Enter your password"
-                                className={'w-full'}
-                            />
-
-                            <Description>
-                                Must be at least 8 characters with 1 uppercase and 1 number
-                            </Description>
-
-                            <FieldError />
-
-
-
-                        </TextField>
+                                        {visiblePass ? <Eye color='#808080' /> :
+                                            <EyeClosed color='#808080' />}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Submit */}
                         <div className="flex justify-center gap-2 w-full">

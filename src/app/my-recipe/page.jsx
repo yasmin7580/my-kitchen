@@ -6,6 +6,8 @@ import axios from "axios";
 import { Clock3, Pencil, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const emptyRecipe = {
   recipeName: "",
@@ -32,7 +34,7 @@ const MyRecipe = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["myRecipes", user?.email],
     queryFn: async () => {
       const res = await axios.get("http://localhost:8000/recipes");
@@ -56,32 +58,56 @@ const MyRecipe = () => {
 
   const saveChanges = async (event) => {
     event.preventDefault();
+    const form = event.target
+    const formData = new FormData(form)
+    const data = Object.fromEntries(formData)
+
+    console.log(data)
     if (!selectedRecipe?._id) return;
 
     setIsSaving(true);
     try {
-      await axios.put(`http://localhost:8000/recipes/${selectedRecipe._id}`, formValues);
-      await queryClient.invalidateQueries({ queryKey: ["myRecipes", userEmail] });
+      await axios.patch(`http://localhost:8000/recipes/${selectedRecipe._id}`, data);
+      await refetch()
       setSelectedRecipe(null);
     } finally {
       setIsSaving(false);
     }
   };
 
-  const deleteRecipe = async (recipe) => {
-    if (!recipe?._id || !window.confirm(`Delete “${recipe.recipeName}”?`)) return;
 
-    setDeletingId(recipe._id);
-    try {
-      await axios.delete(`http://localhost:8000/recipes/${recipe._id}`);
-      await queryClient.invalidateQueries({ queryKey: ["myRecipes",userEmail] });
-    } finally {
-      setDeletingId(null);
-    }
-  };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        toast.promise(
+          axios.delete(`http://localhost:8000/recipe/${id}`),
+          {
+            loading: "Deleting...",
+            success: async ({ data }) => {
+              if (data.deletedCount > 0) {
+                await refetch();
+                return "Recipe deleted successfully!";
+              }
+
+            },
+            error: "Something went wrong!",
+          }
+        );
+      }
+    });
+  }
 
   return (
     <section className="min-h-screen bg-[#f7f6ef] px-5 py-12 sm:px-8 lg:px-12">
+      <Toaster />
       <div className="mx-auto max-w-7xl">
         <p className="font-semibold uppercase tracking-[0.16em] text-[#b65313]">Your kitchen</p>
         <h1 className="mt-2 text-3xl font-bold text-[#1f2f17] sm:text-4xl">My recipes</h1>
@@ -107,7 +133,7 @@ const MyRecipe = () => {
                   <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#61705a]">{recipe.ingredients}</p>
                   <div className="mt-5 grid grid-cols-2 gap-3 border-t border-[#edf0e9] pt-5">
                     <button type="button" onClick={() => openUpdateModal(recipe)} className="inline-flex items-center justify-center gap-2 rounded-full border border-[#54920f] px-4 py-2.5 font-bold text-[#447a0c] transition hover:bg-[#eff7e9]"><Pencil size={16} /> Update</button>
-                    <button type="button" onClick={() => deleteRecipe(recipe)} disabled={deletingId === recipe._id} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#b65313] px-4 py-2.5 font-bold text-white transition hover:bg-[#d16c29] disabled:cursor-not-allowed disabled:opacity-60"><Trash2 size={16} /> {deletingId === recipe._id ? "Deleting..." : "Delete"}</button>
+                    <button type="button" onClick={() => handleDelete(recipe._id)} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#b65313] px-4 py-2.5 font-bold text-white transition hover:bg-[#d16c29] disabled:cursor-not-allowed disabled:opacity-60"><Trash2 size={16} /> {deletingId === recipe._id ? "Deleting..." : "Delete"}</button>
                   </div>
                 </div>
               </article>
