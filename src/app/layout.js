@@ -1,17 +1,14 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import AppQueryClientProvider from "./QueryClientProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const OutfitFont = Outfit({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+
 
 export const metadata = {
   title: "Create Next App",
@@ -22,15 +19,16 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${OutfitFont.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer/>
-
+        <AppQueryClientProvider>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer/>
+        </AppQueryClientProvider>
       </body>
     </html>
   );

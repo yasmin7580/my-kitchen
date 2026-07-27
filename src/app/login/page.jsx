@@ -8,15 +8,9 @@ import {
     FieldError,
     Form,
     Input,
-    Label,
+    Label,  
     TextField
 } from "@heroui/react";
-
-
-
-
-
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -52,9 +46,6 @@ const LoginPage = () => {
         const { error } = await authClient.signIn.social({
             provider: "google",
             callbackURL: "/",
-
-
-
         })
 
         if (error) {
@@ -74,9 +65,6 @@ const LoginPage = () => {
                     <h1 className="mt-2">
                         Login
                     </h1>
-
-
-
                 </div>
 
                 {/* Card */}
@@ -179,12 +167,12 @@ const LoginPage = () => {
 
 
 
-                    
+
 
                     {/* Divider */}
                     <div className="space-y-4 mt-5">
 
-                        <p className="text-center p-2 rounded-full border-2 border-cyan-400 text-sm sm:text-base">
+                        <p className="text-center p-2 text-black rounded-full border-2 border-cyan-400 text-sm sm:text-base">
                             Or Sign in with
                         </p>
 
@@ -205,7 +193,7 @@ const LoginPage = () => {
                     </div>
 
                     {/* Register */}
-                    <h1 className="text-center mt-5 text-sm sm:text-base">
+                    <h1 className="text-center text-gray-500 mt-5 text-sm sm:text-base">
 
                         Don&apos;t have an account ?
 

@@ -43,13 +43,11 @@ export default function Register() {
         formData.delete("image")
 
 
-        const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=46cef828a7aeed48196e6dc399220d34`, image)
+        const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMAGE_BB_API_KEY}`, image)
         console.log(data.data.url)
         formData.append("image", data.data.url)
-        formData.append("role", id.id)
-        formData.append('opportunity', 3)
 
-
+        console.log(process.env.NEXT_PUBLIC_IMAGE_BB_API_KEY)
         const newFormData = Object.fromEntries(formData)
 
 
