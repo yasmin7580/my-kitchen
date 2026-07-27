@@ -1,5 +1,5 @@
 "use client"
-import { authClient } from '@/lib/auth-client';
+import { authClient, useSession } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
 import { ChevronDown, LogOut, ShieldPlus } from 'lucide-react';
 import Image from 'next/image';
@@ -11,10 +11,10 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false)
     const router = useRouter()
-    const { data: session } = authClient.useSession();
+    const { data: session } = useSession();
 
     const user = session?.user;
-    console.log(user)
+    console.log()
     const handleSignOut = async (e) => {
         const { token } = await authClient.getAccessToken()
         console.log(token)
