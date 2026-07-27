@@ -26,7 +26,7 @@ export default function UpdateRecipe() {
   useEffect(() => {
     const getRecipe = async () => {
       try {
-        const result = await axios.get(`http://localhost:8000/recipes/${id}`);
+        const result = await axios.get(`https://my-kitchen-server-mu.vercel.app/recipes/${id}`);
         setRecipe({ ...emptyRecipe, ...result.data });
       } finally {
         setIsLoading(false);
@@ -44,7 +44,7 @@ export default function UpdateRecipe() {
     event.preventDefault();
     setIsSaving(true);
     try {
-      await axios.put(`http://localhost:8000/recipes/${id}`, recipe);
+      await axios.put(`https://my-kitchen-server-mu.vercel.app/recipes/${id}`, recipe);
       router.push("/my-recipe");
     } finally {
       setIsSaving(false);

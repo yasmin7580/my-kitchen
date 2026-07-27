@@ -29,7 +29,7 @@ export default function AllRecipe() {
     useEffect(() => {
         const getRecipe = async () => {
             try {
-                const result = await axios.get("http://localhost:8000/recipes")
+                const result = await axios.get("https://my-kitchen-server-mu.vercel.app/recipes")
                 setRecipes(Array.isArray(result.data) ? result.data : [])
             } catch {
                 setRecipes([])

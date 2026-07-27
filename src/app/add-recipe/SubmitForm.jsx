@@ -33,7 +33,7 @@ const SubmitForm = ({ children }) => {
             recipe.userName = session?.user?.name;
             recipe.userId = session?.user?.id;
 
-            await axios.post("http://localhost:8000/recipes", recipe);
+            await axios.post("https://my-kitchen-server-mu.vercel.app/recipes", recipe);
 
             router.push("/all-recipe");
         } catch (error) {

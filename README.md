@@ -127,10 +127,10 @@ The API route authenticates the request, reads the `aiConversations` MongoDB col
 
 The frontend and AI route expect the local recipe service to provide:
 
-- `GET http://localhost:8000/recipes`
-- `POST http://localhost:8000/recipes`
-- `GET`, `PUT`, or `PATCH http://localhost:8000/recipes/:id`
-- `DELETE http://localhost:8000/recipe/:id`
+- `GET https://my-kitchen-server-mu.vercel.app/recipes`
+- `POST https://my-kitchen-server-mu.vercel.app/recipes`
+- `GET`, `PUT`, or `PATCH https://my-kitchen-server-mu.vercel.app/recipes/:id`
+- `DELETE https://my-kitchen-server-mu.vercel.app/recipe/:id`
 
 A recipe should include fields such as `recipeName`, `image`, `category`, `difficulty`, `cookingTime`, `ingredients`, `instructions`, `tags`, and `userEmail`.
 

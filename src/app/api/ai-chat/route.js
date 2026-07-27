@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MAX_MESSAGE_LENGTH = 1_000;
-const RECIPES_API_URL = "http://localhost:8000/recipes";
+const RECIPES_API_URL = "https://my-kitchen-server-mu.vercel.app/recipes";
 
 const responseSchema = {
   type: "OBJECT",

@@ -19,6 +19,7 @@ const emptyRecipe = {
   instructions: "",
 };
 
+
 const toFormValues = (recipe) => Object.fromEntries(
   Object.keys(emptyRecipe).map((key) => [key, recipe?.[key] ?? ""]),
 );
@@ -37,7 +38,8 @@ const MyRecipe = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["myRecipes", user?.email],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:8000/recipes");
+      const res = await axios.get("https://my-kitchen-server-mu.vercel.app/recipes");
+      //https://my-kitchen-seven-blue.vercel.app
       return Array.isArray(res.data)
         ? res.data.filter((recipe) => recipe.userEmail === userEmail)
         : [];
@@ -67,7 +69,7 @@ const MyRecipe = () => {
 
     setIsSaving(true);
     try {
-      await axios.patch(`http://localhost:8000/recipes/${selectedRecipe._id}`, data);
+      await axios.patch(`https://my-kitchen-server-mu.vercel.app/recipes/${selectedRecipe._id}`, data);
       await refetch()
       setSelectedRecipe(null);
     } finally {
@@ -88,7 +90,7 @@ const MyRecipe = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         toast.promise(
-          axios.delete(`http://localhost:8000/recipe/${id}`),
+          axios.delete(`https://my-kitchen-server-mu.vercel.app/recipe/${id}`),
           {
             loading: "Deleting...",
             success: async ({ data }) => {
