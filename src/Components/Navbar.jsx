@@ -14,6 +14,7 @@ const Navbar = () => {
     const { data: session } = authClient.useSession();
 
     const user = session?.user;
+    console.log(user)
     const handleSignOut = async (e) => {
         const { token } = await authClient.getAccessToken()
         console.log(token)
