@@ -1,11 +1,5 @@
-// import { jwtClient } from "better-auth/client/plugins"
-import { createAuthClient } from "better-auth/react"
+import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient({
-    baseURL: process.env.BETTER_AUTH_URL,
-    // plugins:[
-    //     jwtClient()
-    // ]
-
-})
-export const { useSession } = createAuthClient()
+// Leave baseURL unset so the browser always uses the current site origin.
+// This works for localhost, Vercel preview URLs, and the production domain.
+export const authClient = createAuthClient();

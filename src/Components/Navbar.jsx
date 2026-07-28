@@ -1,5 +1,5 @@
 "use client"
-import { authClient, useSession } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
 import { ChevronDown, LogOut, ShieldPlus } from 'lucide-react';
 import Image from 'next/image';
@@ -11,7 +11,11 @@ import Swal from 'sweetalert2';
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false)
     const router = useRouter()
-    const { data: session } = useSession();
+    // const { data: session } = authClient.useSession();
+    const { data: session, isPending } = authClient.useSession();
+
+    console.log("session:", session);
+    console.log("isPending:", isPending);
 
     const user = session?.user;
     console.log()
@@ -19,7 +23,7 @@ const Navbar = () => {
         const { token } = await authClient.getAccessToken()
         console.log(token)
 
-      
+
 
         Swal.fire({
             title: "Are you sure?",
@@ -67,11 +71,11 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Image
-                    src="/my-kitchen-logo (2).png"
-                    alt='logo-image'
-                    width={150}
-                    height={50}
-                    className='h-auto w-28 object-contain sm:w-32'
+                        src="/my-kitchen-logo (2).png"
+                        alt='logo-image'
+                        width={150}
+                        height={50}
+                        className='h-auto w-28 object-contain sm:w-32'
 
                     />
                 </div>

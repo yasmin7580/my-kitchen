@@ -58,6 +58,17 @@ My Kitchen is a recipe-sharing web application where home cooks can discover rec
 
    Keep `.env` private. Never commit it or use `NEXT_PUBLIC_GEMINI_API_KEY`; the Gemini key must remain server-side.
 
+   ## Vercel deployment
+
+   Add the same variables in **Vercel → Project Settings → Environment Variables** for the Production environment, with these production-specific values:
+
+   ```env
+   BETTER_AUTH_URL=https://your-project.vercel.app
+   BETTER_AUTH_SECRET=a-random-secret-of-at-least-32-characters
+   ```
+
+   `MONGODB_URI`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GEMINI_API_KEY` must also be configured in Vercel. Redeploy after saving them. If MongoDB Atlas is used, its network access rules must allow connections from Vercel.
+
 4. Start the recipe API on port `8000`.
 
 5. Start the Next.js application:

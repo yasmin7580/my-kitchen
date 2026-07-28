@@ -48,7 +48,7 @@ const LoginPage = () => {
 
         const { error } = await authClient.signIn.social({
             provider: "google",
-            callbackURL: "/",
+            callbackURL:"/",
         })
 
         if (error) {
