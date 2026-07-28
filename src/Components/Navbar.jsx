@@ -19,9 +19,7 @@ const Navbar = () => {
         const { token } = await authClient.getAccessToken()
         console.log(token)
 
-        // e.stopPropagation()
-        // e.preventDefault()
-        // e.stop
+      
 
         Swal.fire({
             title: "Are you sure?",
